@@ -29,12 +29,10 @@ export default function post(props) {
 // 最初に実行される。事前ビルドするパスを配列でreturnする。
 export async function getStaticPaths() {
   const data = await client.get({ endpoint: "tech_blog" });
-  // レポジトリの名前をパスとする
+  // ["/tech_posts/jf3ij23", "/tech_posts/sldfkajsdf"]などが入る
   const paths = data.contents.map(obj => `/tech_posts/${obj.id}`)
 
-  // paths: ["/posts/lskdfjsldf", "/posts/sldkfjslfs"]
-
-  // 事前ビルドしたいパスをpathsとして渡す fallbackについては後述
+  // 事前ビルドしたいパスをpathsとして渡す
   return { paths, fallback: false }
 }
 
